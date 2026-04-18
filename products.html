@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Products</title>
+
+    <style>
+        body {
+            background-color: #f4f6f8;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            width: 60%;
+            margin: auto;
+            margin-top: 50px;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th {
+            background-color: #3498db;
+            color: white;
+            padding: 10px;
+        }
+
+        td {
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .nav {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .nav a {
+            margin: 10px;
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>Add Product</h2>
+
+    <form action="/add_product" method="POST">
+        <input type="text" name="name" placeholder="Product Name" required>
+        <input type="number" name="price" placeholder="Price" required>
+        <button type="submit">Add Product</button>
+    </form>
+
+    <h2>Product List</h2>
+
+    {% if products %}
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Price</th>
+            </tr>
+
+            {% for p in products %}
+            <tr>
+                <td>{{ p[0] }}</td>
+                <td>{{ p[1] }}</td>
+                <td>{{ p[2] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p style="text-align:center;">No products yet</p>
+    {% endif %}
+
+    <div class="nav">
+        <a href="/">Users</a> |
+        <a href="/orders">Orders</a>
+    </div>
+
+</div>
+
+</body>
+</html>
