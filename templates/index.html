@@ -1,0 +1,108 @@
+ <!DOCTYPE html>
+<html>
+<head>
+    <title>User Management</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: linear-gradient(to right, #eef2ff, #fdfbfb);
+        }
+
+        .navbar {
+            background: linear-gradient(90deg, #6a11cb, #2575fc);
+        }
+
+        .card {
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .btn-success {
+            background: linear-gradient(45deg, #43cea2, #185a9d);
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border: none;
+        }
+
+        .btn-danger {
+            background: linear-gradient(45deg, #ff416c, #ff4b2b);
+            border: none;
+        }
+
+        .user-card {
+            background: white;
+            border-radius: 15px;
+            padding: 15px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-dark">
+  <div class="container-fluid">
+    <span class="navbar-brand">💜 User Dashboard</span>
+  </div>
+</nav>
+
+<div class="container mt-5">
+
+    <!-- ADD USER -->
+    <div class="card p-4 mb-4">
+        <h4>Add User</h4>
+
+        <form action="/add_user" method="POST">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <input class="form-control mb-3" name="first_name" placeholder="First Name" required>
+                </div>
+                <div class="col-md-6">
+                    <input class="form-control mb-3" name="last_name" placeholder="Last Name" required>
+                </div>
+            </div>
+
+            <select class="form-select mb-3" name="gender" required>
+                <option value="">Select Gender</option>
+                <option value="Male">Man</option>
+                <option value="Female">Woman</option>
+            </select>
+
+            <input class="form-control mb-3" name="phone" placeholder="Phone">
+            <input class="form-control mb-3" name="email" placeholder="Email">
+
+            <button class="btn btn-success w-100">Add User</button>
+        </form>
+    </div>
+
+    <!-- USERS -->
+    <div class="card p-4">
+        <h4>Users</h4>
+
+        {% for user in users %}
+        <div class="user-card">
+
+            <h5>👤 {{ user[1] }} {{ user[2] }}</h5>
+
+            <p><b>Gender:</b> {{ user[3] }}</p>
+            <p><b>📞:</b> {{ user[4] }}</p>
+            <p><b>📧:</b> {{ user[5] }}</p>
+
+            <a href="/update_user/{{ user[0] }}" class="btn btn-primary btn-sm">Edit</a>
+            <a href="/delete_user/{{ user[0] }}" class="btn btn-danger btn-sm">Delete</a>
+
+        </div>
+        {% endfor %}
+
+    </div>
+
+</div>
+
+</body>
+</html>
